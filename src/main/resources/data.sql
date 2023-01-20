@@ -5,5 +5,5 @@ insert into users(id,password,username,enabled,is_admin) values(5,'$2a$12$1xi9Ew
 
 insert into authorities(id,authority,username) values(3,'ROLE_ADMIN','kevinkad');
 insert into authorities(id,authority,username) values(4,'ROLE_USER','kev123');
-insert into authorities(id,authority,username) values(4,'ROLE_USER','kevink');
+insert into authorities(id,authority,username) values(5,'ROLE_USER','kevink');
 
