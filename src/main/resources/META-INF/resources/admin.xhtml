@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/tags">
+
+<h:head>
+	<title>Admin Dashboard</title>
+	<h:outputStylesheet name="/css/main.css" />
+</h:head>
+
+<h:body>
+
+
+	<div class="card">
+		<h:form>
+			<p:panel header="Admin dashboard">
+				<h:panelGrid columns="1" styleClass="ui-fluid left ui-noborder">
+					<h:outputLabel for="txt2" value="Select Username" />
+					<p:selectOneMenu id="txt2" value="#{userData.username}"
+						required="true" label="Text 2" style="width: 12rem">
+						<f:selectItem itemLabel="Select username" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{userDataAction.users}" var="user"
+							itemLabel="#{user.username}" itemValue="#{user.username}" />
+
+					</p:selectOneMenu>
+
+
+					<p:outputLabel for="start" value="Start" />
+					<p:datePicker id="start" value="#{userData.startDate}" />
+
+					<p:outputLabel for="end" value="End" />
+					<p:datePicker id="end" value="#{userData.endDate}" />
+
+
+
+
+					<p:dataTable lazy="true" value="#{userDataAction.getAudits()}"
+						var="audits" rowKey="#{audits.id}" selectionMode="single">
+
+						<p:column headerText="Equation">
+							<h:outputText value="#{audits.equation}" />
+						</p:column>
+						<p:column headerText="Answer">
+							<h:outputText value="#{audits.answer}" />
+						</p:column>
+						<p:column headerText="User">
+							<h:outputText value="#{audits.user}" />
+						</p:column>
+						<p:column headerText="Time">
+							<h:outputText value="#{audits.timeStamp}" />
+						</p:column>
+					</p:dataTable>
+
+
+				</h:panelGrid>
+
+
+			</p:panel>
+
+			<p:commandButton value="Search" action="#{userDataAction.getDates()}"
+				ajax="false" />
+
+		</h:form>
+	</div>
+	<h:form onsubmit="this.action='#{request.contextPath}/logout';"
+		class="logout-form">
+
+		<p:commandButton value="Logout" ajax="false" />
+	</h:form>
+	<h:form class="logout-form">
+
+	</h:form>
+	<div style="position: relative; width: 600px; height: 500px;">
+
+		<div style="position: absolute; bottom: 5px; background-color: green">
+			<h:outputText value="#{userData.projectVersion}" />
+		</div>
+	</div>
+
+</h:body>
+</html>
